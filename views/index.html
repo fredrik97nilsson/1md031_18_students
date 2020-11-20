@@ -1,71 +1,160 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+
+
+
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta charset="utf-8"/>
+
+      <link rel="stylesheet" type="text/css" href="css\style.css">
+      <link rel="stylesheet" href="css/deli-very.css">
+
+      <script src="/socket.io/socket.io.js" defer></script>
+
+
+
+        <script src="/vue/vue.js" defer></script>
+        <script src="https://vuejs.org/js/vue.js"></script>
+
+
+        <script type="text/javascript" src="js/menu.js"></script>
+        <script src="js/js_script.js" defer></script>
+        <script src="js/vue_script.js" defer></script>
+
         <title>Get your burger</title>
-        <meta charset="utf-8"/>
+
+
+
+
     </head>
     <body>
-      <mian>
+      <main>
+        <div class="sidhuvud">
         <h1>Välkommen till BigBeautifulBurgers</h1>
+        <img  src="https://www.beernews.se/wp-content/uploads/2018/07/pub.jpg">
+      </div>
       </main>
-      <section>
+      <section id="burgerInfo">
         <h3>Våra Burgare</h3>
+
+
+
+
+
+
         <p>Välj din favorit bland alla våra favoriter</p>
-        <table>
-          <thead>
-            <tr>
-                <th>Orginal Burgaren</th>
-                <th>vegtarisk burgare</th>
-                <th>Kryddstark Burgare</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><img src="https://pagen.se/globalassets/kampanjer/garden-party-2018/burgare-med-vitloks--och-chilimajonas.png.png?w=734&h=462&mode=crop&resized=true"width="250" height="200"></td>
-              <td><img src="https://assets.icanet.se/q_auto,f_auto/imagevaultfiles/id_161382/cf_259/svamp-och-quinoaburgare-med-picklade-senapsfron-oc.jpg"width="250"height="200"></td>
-              <td><img src="https://www.santamariaworld.com//globalassets/_recipes/tex-mex/hamburgare_chili.jpg"width="250"height="200"></td>
-            </tr>
-            <tr>
-              <td>
-                <dl>
-                  <dt>Allergier</dt>
-                  <dd>Laktos, gluten</dd>
-
-                  <dt>Vegetarisk</dt>
-                  <dd>Innehåller Kött</dd>
-                </dl>
-              </td>
-              <td>
-                <dl>
-                  <dt>Allergier</dt>
-                  <dd>Laktos</dd>
-
-                  <dt>Vegetarisk</dt>
-                  <dd>Jajemensan</dd>
-                </dl>
-              </td>
-              <td>
-                <dl>
-                  <dt>Allergier</dt>
-                  <dd>Gluten</dd>
-
-                  <dt>Vegetarisk</dt>
-                  <dd>Innehåller Kött</dd>
-                </dl>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-
-
+        <div>
+          <form>
+          <label for="sortBy">Sortera efter:</label>
+          <select id="sortBy">
+          <option value="0" selected>Sortera inte</option>
+          <option value="1">Kalorier lägst till högst</opion>
+          <option value="2">Kalorier högst till lägst</option>
+          </select>
+        </form>
+        <form>
+          <label for="filterBy">Filtrera efter:<label>
+          <select id="filterBy">
+          <option value="0" selected>Inget filter</option>
+          <option value="1">Vegetarisk</option>
+          <option value="2">Glutenfri</option>
+          <option value="3">Laktosfri</option>
+          </select>
+        </form>
+        </div>
+        <div id="burgers"></div>
       </section>
-      <section>
+      <section id="orderInfo">
         <h3>Din information</h3>
         <p>Fyll i din information, så levererar vi din burgare hem till dig</p>
+        <p>
+          <label for="fullname">För- och efternamn</label><br>
+          <input type="text" id="fullname" name="na" required="required" placeholder="För- och efternamn">
+        </p>
+        <p>
+          <label for="Emejl">Emejladress</label><br>
+          <input type="email" id="Emejl" name="Em" required="required" placeholder="Emailadress">
+        </p>
+        <p>
+
+        <p>
+          <label for="paymentmethod">Betalmetod</label><br>
+          <select id="paymentmethod" name="payM">
+            <option>Betalkort</option>
+            <option>Banköverförning</option>
+            <option selected="selected">Swish</option>
+          </select>
+        </p>
+        <p>
+          <label>Kön</label>
+        </p>
+        <p>
+          <input type="radio" id=woman name="Gen" value="Kvinna">
+          <label for="woman">Kvinna</label>
+        </p>
+        <p>
+          <input type="radio" id="=Man" name="Gen" value="Man">
+          <label for="Man">Man</label>
+        </p>
+        <p>
+          <input type="radio" id="NoneBin" name="Gen" value="Icke binär">
+          <label for="NoneBin">Icke Binär</label>
+        </p>
+        <p>
+          <input type="radio" id="NoAns" name="Gen" value="Vill inte uppge">
+          <label for="NoAns">Vill inte uppge</label>
+        </p>
+
+
+
+
+
+        <body>
+          <h1> Click in the map! </h1>
+          <a href="/dispatcher" target="_blank">Open dispatcher in new window</a>.
+          <div class="view-box">
+            <div id="dots" v-on:click='displayOrder'>
+
+                <div
+
+                  v-bind:style="{ left: cords.x + 'px', top: cords.y + 'px'}">
+                  T
+                </div>
+            </div>
+          </div>
+        </body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <div id="orderDiv">
+          <button v-on:click="addOrder" type="submit" id="orderButton"><img src="https://e7.pngegg.com/pngimages/855/835/png-clipart-cheeseburger-hamburger-emoji-sticker-android-hamburguer-food-orange.png" width="20" height="20">Skicka min order</button>
+        </div>
+
+
+
+
+        <div id="recivedOrder">
+
+
+        </div>
+
+
 
 
       </section>
       <footer>
+        <hr>
         <p>&copy Fredrik Nilsson</p>
       </footer>
     </body>
