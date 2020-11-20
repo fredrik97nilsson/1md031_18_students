@@ -1,0 +1,108 @@
+@media screen and (max-width: 800px) {
+    h1 {
+        font-size: 6vw;
+    }
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.sidhuvud {
+  margin-left: 2%;
+  margin-right: 2%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.sidhuvud>img {
+  opacity: 0.5;
+  width: 100%;
+  height: auto;
+}
+
+.sidhuvud>h1 {
+  position: absolute;
+  padding-top: 50px;
+  padding-left: 30%;
+  padding-right: 30%;
+}
+
+body {
+  font-family: arial;
+  font-size: 15px;
+}
+
+#burgerInfo {
+  --borderAndtextColor: white;
+  background-color: black;
+  color: var(--borderAndtextColor);
+  margin: 1% 2% 2px 2%;
+  border:2px dashed var(--borderAndtextColor);
+  padding-left:  2%;
+}
+
+#burgerInfo>div>form {
+  display: inline;
+}
+
+#orderInfo{
+  --borderAndtextColor:black;
+  color: var(--borderAndtextColor);
+  border: 2px dashed var(--borderAndtextColor);
+  margin: 1% 2% 2px 2%;
+  padding-left:  2%;
+  padding-bottom: 2%;
+}
+
+.laktos {
+  font-weight: bold;
+}
+
+.gluten {
+
+  font-weight: bold;
+}
+
+table {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#orderInfo>button {
+  margin-top: 20px;
+  margin-left: 10px;
+}
+
+.wrapper {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: 33% 33% 33%;
+  grid-template-rows: 100%;
+  background-color: black;
+}
+
+.box {
+
+}
+
+.a {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.b {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.c {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+.wrapper>div>img {
+  width: 65%;
+  height: 200px;
+}
